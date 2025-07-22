@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle Financeiro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Controle Financeiro Pessoal</h1>
+  </header>
+
+  <section id="resumo">
+    <h2>Resumo Financeiro</h2>
+    <div id="saldo">Saldo: R$ 0,00</div>
+    <div id="totais"></div>
+  </section>
+
+  <section id="filtros">
+    <h2>Filtros</h2>
+    <label>Mês:
+      <input type="month" id="filtroMes">
+    </label>
+    <label>Tipo:
+      <select id="filtroTipo">
+        <option value="">Todos</option>
+        <option value="receita">Receitas</option>
+        <option value="despesa">Despesas</option>
+      </select>
+    </label>
+    <label>Categoria:
+      <input type="text" id="filtroCategoria" placeholder="Categoria">
+    </label>
+    <button id="aplicarFiltros">Aplicar Filtros</button>
+  </section>
+
+  <section id="formulario">
+    <h2>Nova Transação</h2>
+    <form id="formTransacao">
+      <input type="text" id="descricao" placeholder="Descrição" required>
+      <input type="number" id="valor" placeholder="Valor" required>
+      <select id="tipo" required>
+        <option value="">Tipo</option>
+        <option value="receita">Receita</option>
+        <option value="despesa">Despesa</option>
+      </select>
+      <input type="text" id="categoria" placeholder="Categoria" required>
+      <input type="date" id="data" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+  </section>
+
+  <section id="lista">
+    <h2>Transações</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Tipo</th>
+          <th>Categoria</th>
+          <th>Data</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaTransacoes"></tbody>
+    </table>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
