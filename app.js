@@ -48,9 +48,21 @@ function exibirTransacoes(transacoes) {
   });
 }
 
-//fazer a seguir
 function aplicarFiltros() {
-  alert('Função ainda será implementada.');
+  const mesAno = document.getElementById('filtroMes').value;
+  const tipo = document.getElementById('filtroTipo').value;
+  const categoria = document.getElementById('filtroCategoria').value;
+
+  let filtros = {};
+  if (mesAno) {
+    const [ano, mes] = mesAno.split('-');
+    filtros.ano = ano;
+    filtros.mes = mes;
+  }
+  if (tipo) filtros.tipo = tipo;
+  if (categoria) filtros.categoria = categoria;
+
+  carregarTransacoes(filtros);
 }
 
 async function cadastrarTransacao(event) {
@@ -83,14 +95,72 @@ async function cadastrarTransacao(event) {
   }
 }
 
-//implementar a seguir
-function editarTransacao(id) {
-  alert('Função ainda será implementada.');
-}
+async function editarTransacao(id) {
+  try {
+    const resp = await fetch(`${BASE_URL}/transacoes/${id}`);
+    const transacao = await resp.json();
 
-//implementar a seguir
+    document.getElementById('descricao').value = transacao.descricao;
+    document.getElementById('valor').value = transacao.valor;
+    document.getElementById('tipo').value = transacao.tipo;
+    document.getElementById('categoria').value = transacao.categoria;
+    document.getElementById('data').value = transacao.data;
+
+    const form = document.getElementById('formTransacao');
+    form.removeEventListener('submit', cadastrarTransacao);
+    form.onsubmit = async (event) => {
+      event.preventDefault();
+
+      const atualizada = {
+        id: id,
+        descricao: document.getElementById('descricao').value,
+        valor: parseFloat(document.getElementById('valor').value),
+        tipo: document.getElementById('tipo').value,
+        categoria: document.getElementById('categoria').value,
+        data: document.getElementById('data').value
+      };
+
+      try {
+        const updateResp = await fetch(`${BASE_URL}/transacoes/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(atualizada)
+        });
+
+        if (updateResp.ok) {
+          form.reset();
+          form.onsubmit = cadastrarTransacao;
+          carregarTransacoes();
+        } else {
+          const erro = await updateResp.json();
+          alert('Erro ao atualizar: ' + erro.erro);
+        }
+      } catch (error) {
+        console.error('Erro ao atualizar transação:', error);
+      }
+    };
+  } catch (error) {
+    console.error('Erro ao buscar transação para edição:', error);
+  }
+}
 async function excluirTransacao(id) {
-  alert('Função ainda será implementada.');
+  const confirmar = confirm('Tem certeza que deseja excluir esta transação?');
+  if (!confirmar) return;
+
+  try {
+    const resp = await fetch(`${BASE_URL}/transacoes/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (resp.ok) {
+      carregarTransacoes();
+    } else {
+      const erro = await resp.json();
+      alert('Erro ao excluir: ' + erro.erro);
+    }
+  } catch (error) {
+    console.error('Erro ao excluir transação:', error);
+  }
 }
 
 function atualizarResumo(transacoes) {
