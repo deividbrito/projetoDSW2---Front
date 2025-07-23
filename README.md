@@ -12,7 +12,7 @@ Este é o front-end do sistema de controle financeiro pessoal. A aplicação é 
 
 Abaixo está o link para o vídeo demonstrativo do projeto:
 
-[ACESSE O VÍDEO CLICANDO AQUI!]((https://drive.google.com/file/d/1GAbsrCxLSaGjHotkrgYBNOoYniE5Txvv/view?usp=sharing))
+[ACESSE O VÍDEO CLICANDO AQUI!](https://drive.google.com/file/d/1GAbsrCxLSaGjHotkrgYBNOoYniE5Txvv/view?usp=sharing)
 
 ## 🎯 Funcionalidades
 
