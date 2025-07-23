@@ -5,7 +5,7 @@ Este é o front-end do sistema de controle financeiro pessoal. A aplicação é 
 
 ## 📷 Visão Geral
 
-![Tela principal](screenshot.png)
+![Tela principal](images/screenshot.png)
 
 
 ## 🎥 Vídeo Demonstrativo
