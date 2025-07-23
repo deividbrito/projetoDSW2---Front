@@ -1,6 +1,10 @@
 // url base da API
 const BASE_URL = 'http://localhost:8080/controle-financeiro-api';
 
+document.getElementById('toggleTema').addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+});
+
 // carregar transacoes quando inicia
 window.addEventListener('DOMContentLoaded', () => {
   carregarTransacoes();
